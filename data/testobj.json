@@ -1,0 +1,62 @@
+
+https://oauth.vk.com/authorize?client_id=7370854&scope=friends,photos,audio,video,docs,notes,pages,status,offers,questions,wall,groups,notifications,stats,offline,docs,pages,stats,notifications&response_type=token
+
+
+{"response":
+[
+	{"id":3436314,"first_name":"Альберт",
+		"last_name":"Суханов",
+		"is_closed":false,
+		"can_access_closed":true,
+		"sex":2,
+		"bdate":"5.9.1989",
+		"city":{"id":1161146,"title":"Иловля"},
+		"country":{"id":1,"title":"Россия"},
+		"has_photo":1,
+		"mobile_phone":"мобильный телефон",
+		"home_phone":"дополнительный телефон",
+		"last_seen":{"time":1584988470,"platform":7},
+	"followers_count":141}
+]
+}
+
+replace('?ava=1','')
+{"id":3436314,
+	"first_name":"Альберт",
+		"last_name":"Суханов",
+		"is_closed":false,
+		"can_access_closed":true,
+		"sex":2,
+		"bdate":"5.9.1989",
+		"city":{"id":1161146,"title":"Иловля"},
+		"country":{"id":1,"title":"Россия"},
+		"has_photo":1,
+		"mobile_phone":"мобильный телефон",
+		"home_phone":"дополнительный телефон",
+		"last_seen":{"time":1584988470,"platform":7},
+	"followers_count":141}
+
+
+	{"response":
+		[
+			{"id":3436314,
+				"first_name":"Альберт",
+				"last_name":"Суханов",
+				"is_closed":false,
+				"can_access_closed":true,
+				"sex":2,
+				"bdate":"5.9.1989",
+				"city":{"id":1161146,"title":"Иловля"},
+				"country":{"id":1,"title":"Россия"},
+				"photo_100":"https://sun9-26.userapi.com/c837322/v837322314/39482/1xM81WT3i8k.jpg?ava=1",
+				"photo_max":"https://sun9-20.userapi.com/c837322/v837322314/39481/iuFAYeeXDNM.jpg?ava=1",
+				"photo_max_orig":"https://sun9-47.userapi.com/c837322/v837322314/39480/bdCMUPmHsZA.jpg?ava=1",
+				"has_photo":1,
+				"online":0,
+				"mobile_phone":"мобильный телефон",
+				"home_phone":"дополнительный телефон",
+				"last_seen":{"time":1585078409,"platform":7},
+				"followers_count":141,
+				"counters":{"albums":2,"videos":620,"audios":462,"photos":170,"groups":709,"gifts":0,"friends":4,"online_friends":0,"user_photos":0,"followers":141,"subscriptions":1,"pages":235},"relation":0}
+			]
+	}

@@ -1,0 +1,108 @@
+
+588 796 670
+
+500 000 000
+
+
+GET matchprofiles event for range ID: 500000171 500000350
+
+500000296 ' Profile was MATCHED !'
+Processing data for  500000297
+
+500000270 ' Profile was MATCHED !'
+Processing data for  500000271
+
+500000177 ' Profile was MATCHED !'
+Processing data for  500000178
+
+
+GET matchprofiles event for range ID: 500000350 500000515
+
+Data collected and processed. Matches: 1 500000353,2 500000412,3 500000460
+
+
+GET matchprofiles event for range ID: 500000515 500000715  500001015
+
+Data collected and processed. Matches (0):
+
+
+GET matchprofiles event for range ID: 500000715 500001015
+
+Data collected and processed. Matches (2): 1 500000870,2 500000986
+
+GET matchprofiles event for range ID: 500001015 with quantity 200
+
+Data collected and processed. Matches (1): 1 500001194
+
+GET matchprofiles event for range ID: 500001215 with quantity 300
+
+Data collected and processed. Matches (6): 1 500001227,2 500001363,3 500001370,4 500001431,5 500001463,6 500001473
+
+GET matchprofiles event for range ID: 50010000 with quantity 300
+
+Data collected and processed. Matches (5): 1 50010081,2 50010094,3 50010156,4 50010160,5 50010195
+
+GET matchprofiles event for range ID: 50010300 with quantity 500
+
+Data collected and processed. Matches (2): 1 50010534,2 50010676
+
+GET matchprofiles event for range ID: 50010800 with quantity 700
+
+Data collected and processed. Matches (2): 1 50011016,2 50011051
+
+GET matchprofiles event for range ID: 50011500 (50012201) with quantity 700
+
+Data collected and processed. Matches (3): 1 50011588,2 50011826,3 50012144
+
+GET matchprofiles event for range ID: 50012201 with quantity 1000
+
+Data collected and processed. Matches (10): 1 50012306,2 50012379,3 50012452,4 50012587,5 50012638,6 50012705,7 50012794,8 50012912,9 50013103,10 50013172
+
+
+GET matchprofiles event for range ID: 50013210 with quantity 500
+
+Data collected and processed. Matches (5): 1 50013221,2 50013234,3 50013316,4 50013560,5 50013677
+
+GET matchprofiles event for range ID: 50013709 with quantity 700
+
+Data collected and processed. Matches (7): 1 50013772,2 50013817,3 50013819,4 50013882,5 50013892,6 50014115,7 50014196
+
+GET matchprofiles event for range ID: 50014410 with quantity 800
+
+Data collected and processed. Matches (12): 1 50014411,2 50014658,3 50014666,4 50014755,5 50014806,6 50014835,7 50014961,8 50014981,9 50015024,10 50015056,11 50015065,12 50015108
+
+50015210
+
+12100000 500
+
+Data collected and processed. Matches (7): 1 12100253,2 12100291,3 12100305,4 12100332,5 12100368,6 12100377,7 12100412
+
+
+Data collected and processed. Matches (10): 1 12100529,2 12100678,3 12100738,4 12100757,5 12100767,6 12100839,7 12100893,8 12100920,9 12100974,10 12100998
+
+
+12100998
+12101003
+
+Найдено подходящих: 2
+
+Id аккаунта:12101067
+
+Id аккаунта:12101098
+
+Диапазон поиска от 12101200 до 12101350 Найдено подходящих: 2
+
+Id аккаунта:12101222
+
+Id аккаунта:12101226
+
+2020-03-25 18:57:47.244
+GET matchprofiles event for range ID: 12101226 with quantity 200
+
+2020-03-25 18:59:47.257
+GET matchprofiles event for range ID: 12101226 with quantity 200
+
+
+20 000 000
+
+

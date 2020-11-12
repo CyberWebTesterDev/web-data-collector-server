@@ -1,0 +1,24 @@
+{
+  "name": "webscraper_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Anatoly Loskutov",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-ws": "^4.0.0",
+    "flat": "^5.0.0",
+    "jsdom": "^16.2.1",
+    "node-fetch": "^2.6.0",
+    "pg": "^8.1.0",
+    "puppeteer": "^2.1.1",
+    "puppeteer-core": "^2.1.1",
+    "socket.io": "^2.3.0",
+    "websocket": "^1.0.31"
+  }
+}
