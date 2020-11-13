@@ -788,17 +788,17 @@ app.ws("/matchprofiles", (ws, req) => {
 
         getInfoByUserId(i)
           .then((data) => {
-          currentCounter++;
-          //process.stdout.write(`Processed ${currentCounter} account(s)...`);
-          // console.clear();
-          // console.log(`Collected ${currentCounter} account(s)...`)
-          console.log(`WS Data collected for the profile ${i}`);
-          resultarray.push(data.response[0]);
-        })
-          .catch(error) {
-          console.log(error);
-          throw error;
-        }
+            currentCounter++;
+            //process.stdout.write(`Processed ${currentCounter} account(s)...`);
+            // console.clear();
+            // console.log(`Collected ${currentCounter} account(s)...`)
+            console.log(`WS Data collected for the profile ${i}`);
+            resultarray.push(data.response[0]);
+          })
+          .catch((error) => {
+            console.log(error);
+            throw error;
+          });
       }
 
       await waitTimeout(3000);
