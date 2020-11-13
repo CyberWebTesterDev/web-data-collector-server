@@ -16,6 +16,7 @@ const flatten = require("flat");
 const port = 8333;
 const { DBmanager } = require("./db-manager/db-manager");
 const { profileMapper, profileMapperTs } = require("./data-processors/helper");
+const { access_token_2_2 } = require("./access-data/token");
 
 const db = new DBmanager();
 
@@ -59,17 +60,16 @@ app.get("/getdefmov/:from/:to", (req, res) => {
 });
 
 app.get("/vkget/:ida", (req, res) => {
-  // https://api.vk.com/method/friends.getOnline?v=5.52&access_token=
-  // https://api.vk.com/method/users.get?user_ids=210700286&fields=bdate&access_token=533bacf01e11f55b536a565b57531ac114461ae8736d6506a3&v=5.103
+  // https://api.vk.com/method/friends.getOnline?v=5.52&access_token_2=
+  // https://api.vk.com/method/users.get?user_ids=210700286&fields=bdate&access_token_2=533bacf01e11f55b536a565b57531ac114461ae8736d6506a3&v=5.103
 
   const { ida } = req.params;
   const _apibase = `https://api.vk.com/method/`;
-  const access_token = `fe083d0a598076a08306042e3a84da0a56c980124e7d0f93050bbe4abf09457045d17625832216679a369`;
   console.log(`GET vkget event for id: ${ida}`);
 
   const getInfoByUserId = async (id) => {
     const res = await fetch(
-      `${_apibase}users.get?user_ids=${id}&fields=sex,bdate,sex,city,contacts,country,exports,followers_count,has_photo,photo_max,photo_max_orig,photo_100,online,exports,counters,relation,last_seen&access_token=${access_token}&v=5.103`
+      `${_apibase}users.get?user_ids=${id}&fields=sex,bdate,sex,city,contacts,country,exports,followers_count,has_photo,photo_max,photo_max_orig,photo_100,online,exports,counters,relation,last_seen&access_token_2=${access_token_2_2}&v=5.103`
     );
     if (!res.ok) {
       throw new Error(`Something was wrong`);
@@ -86,13 +86,9 @@ app.get("/vkget/:ida", (req, res) => {
 });
 
 app.get("/vkget/matchprofiles/:from/:q", (req, res) => {
-  // https://api.vk.com/method/friends.getOnline?v=5.52&access_token=
-  // https://api.vk.com/method/users.get?user_ids=210700286&fields=bdate&access_token=533bacf01e11f55b536a565b57531ac114461ae8736d6506a3&v=5.103
-
   const { from, q, hash } = req.params;
   let processingFlag = true;
   const _apibase = `https://api.vk.com/method/`;
-  const access_token = `fe083d0a598076a08306042e3a84da0a56c980124e7d0f93050bbe4abf09457045d17625832216679a369`;
   console.log(new Date().toISOString().replace("T", " ").replace("Z", " "));
   console.log(
     `GET matchprofiles event for range ID: ${from} with quantity ${q}`
@@ -100,7 +96,7 @@ app.get("/vkget/matchprofiles/:from/:q", (req, res) => {
 
   const getInfoByUserId = async (id) => {
     const res = await fetch(
-      `${_apibase}users.get?user_ids=${id}&fields=sex,bdate,sex,city,contacts,country,exports,followers_count,has_photo,photo_max,photo_max_orig,photo_100,online,exports,counters,relation,last_seen&access_token=${access_token}&v=5.103`
+      `${_apibase}users.get?user_ids=${id}&fields=sex,bdate,sex,city,contacts,country,exports,followers_count,has_photo,photo_max,photo_max_orig,photo_100,online,exports,counters,relation,last_seen&access_token_2=${access_token_2_2}&v=5.103`
     );
     if (!res.ok) {
       throw new Error(`Something was wrong`);
@@ -160,11 +156,10 @@ app.get("/dbmanager/batchprofilesenrichment", (req, res) => {
   console.log(`Starting to batch loading to DB`);
 
   const _apibase = `https://api.vk.com/method/`;
-  const access_token = `fe083d0a598076a08306042e3a84da0a56c980124e7d0f93050bbe4abf09457045d17625832216679a369`;
 
   const getInfoByUserId = async (id) => {
     const res = await fetch(
-      `${_apibase}users.get?user_ids=${id}&fields=sex,bdate,sex,city,contacts,country,exports,followers_count,has_photo,photo_max,photo_max_orig,photo_100,online,exports,counters,relation,last_seen&access_token=${access_token}&v=5.103`
+      `${_apibase}users.get?user_ids=${id}&fields=sex,bdate,sex,city,contacts,country,exports,followers_count,has_photo,photo_max,photo_max_orig,photo_100,online,exports,counters,relation,last_seen&access_token_2=${access_token_2_2}&v=5.103`
     );
     if (!res.ok) {
       throw new Error(`Something was wrong`);
@@ -216,7 +211,6 @@ app.get(
   "/matchfromsearch/:query/:qnt/:offset/:f/:t/:city/:year/:month/:day",
   (req, res) => {
     let { query, qnt, offset, f, t, city, year, month, day } = req.params;
-    const access_token = `fe083d0a598076a08306042e3a84da0a56c980124e7d0f93050bbe4abf09457045d17625832216679a369`;
 
     let reqObj = {
       query,
@@ -239,7 +233,7 @@ app.get(
     );
 
     let url2 = `https://api.vk.com/method/users.search?sort=0&`;
-    let urlEnd = `access_token=${access_token}&v=5.103`;
+    let urlEnd = `access_token_2=${access_token_2}&v=5.103`;
     let url3 = "";
     let isQ = false;
 
@@ -263,11 +257,6 @@ app.get(
 
     url3 = url3 + urlEnd;
 
-    // console.log(`Formed request URL is: ${url3}`)
-
-    // https://api.vk.com/method/friends.getOnline?v=5.52&access_token=
-    // https://api.vk.com/method/users.get?user_ids=210700286&fields=bdate&access_token=533bacf01e11f55b536a565b57531ac114461ae8736d6506a3&v=5.103
-
     console.log(
       `GET matchfromsearch event with params ${query}/${qnt}/${offset}/${f}/${t}/${city}`
     );
@@ -277,48 +266,45 @@ app.get(
         "Content-Type": "application/x-www-form-urlencoded",
       };
 
-      // console.log(`Type of q (${typeof(q)}): ${q}, city (${typeof(city)}): ${city}, year (${typeof(year)}): ${year}`)
-      // console.log(`Boolean of q: ${Boolean(q)}, city: ${Boolean(city)}, year: ${Boolean(year)}`)
-
       let url = "";
       if (q === "null" && city === "null" && year === "null") {
-        url = `https://api.vk.com/method/users.search?sort=0&offset=${offset}&sex=1&count=${qnt}&country=1&age_from=${f}&age_to=${t}&birth_month=${month}&birth_day=${day}&has_photo=1&access_token=${access_token}&v=5.103`;
+        url = `https://api.vk.com/method/users.search?sort=0&offset=${offset}&sex=1&count=${qnt}&country=1&age_from=${f}&age_to=${t}&birth_month=${month}&birth_day=${day}&has_photo=1&access_token_2=${access_token_2}&v=5.103`;
       }
 
       if (q === "null" && city !== "null" && year === "null") {
-        url = `https://api.vk.com/method/users.search?sort=0&offset=${offset}&sex=1&count=${qnt}&country=1&city=${city}&age_from=${f}&age_to=${t}&birth_month=${month}&birth_day=${day}&has_photo=1&access_token=${access_token}&v=5.103`;
+        url = `https://api.vk.com/method/users.search?sort=0&offset=${offset}&sex=1&count=${qnt}&country=1&city=${city}&age_from=${f}&age_to=${t}&birth_month=${month}&birth_day=${day}&has_photo=1&access_token_2=${access_token_2}&v=5.103`;
       }
 
       if (q !== "null" && city === "null" && year === "null") {
         url = `https://api.vk.com/method/users.search?q=${encodeURIComponent(
           q
-        )}&sort=0&offset=${offset}&sex=1&count=${qnt}&country=1&age_from=${f}&age_to=${t}&birth_month=${month}&birth_day=${day}&has_photo=1&access_token=${access_token}&v=5.103`;
+        )}&sort=0&offset=${offset}&sex=1&count=${qnt}&country=1&age_from=${f}&age_to=${t}&birth_month=${month}&birth_day=${day}&has_photo=1&access_token_2=${access_token_2}&v=5.103`;
       }
 
       if (q !== "null" && city !== "null" && year === "null") {
         url = `https://api.vk.com/method/users.search?q=${encodeURIComponent(
           q
-        )}&sort=0&offset=${offset}&sex=1&count=${qnt}&country=1&city=${city}&age_from=${f}&age_to=${t}&birth_month=${month}&birth_day=${day}&has_photo=1&access_token=${access_token}&v=5.103`;
+        )}&sort=0&offset=${offset}&sex=1&count=${qnt}&country=1&city=${city}&age_from=${f}&age_to=${t}&birth_month=${month}&birth_day=${day}&has_photo=1&access_token_2=${access_token_2}&v=5.103`;
       }
 
       if (q !== "null" && city !== "null" && year !== "null") {
         url = `https://api.vk.com/method/users.search?q=${encodeURIComponent(
           q
-        )}&sort=0&offset=${offset}&sex=1&count=${qnt}&country=1&city=${city}&age_from=${f}&birth_month=${month}&birth_day=${day}&birth_year=${year}&has_photo=1&access_token=${access_token}&v=5.103`;
+        )}&sort=0&offset=${offset}&sex=1&count=${qnt}&country=1&city=${city}&age_from=${f}&birth_month=${month}&birth_day=${day}&birth_year=${year}&has_photo=1&access_token_2=${access_token_2}&v=5.103`;
       }
 
       if (q === "null" && city !== "null" && year !== "null") {
-        url = `https://api.vk.com/method/users.search?sort=0&offset=${offset}&sex=1&count=${qnt}&country=1&city=${city}&birth_month=${month}&birth_day=${day}&birth_year=${year}&has_photo=1&access_token=${access_token}&v=5.103`;
+        url = `https://api.vk.com/method/users.search?sort=0&offset=${offset}&sex=1&count=${qnt}&country=1&city=${city}&birth_month=${month}&birth_day=${day}&birth_year=${year}&has_photo=1&access_token_2=${access_token_2}&v=5.103`;
       }
 
       if (q !== "null" && city === "null" && year !== "null") {
         url = `https://api.vk.com/method/users.search?q=${encodeURIComponent(
           q
-        )}&sort=0&offset=${offset}&sex=1&count=${qnt}&country=1&birth_month=${month}&birth_day=${day}&birth_year=${year}&has_photo=1&access_token=${access_token}&v=5.103`;
+        )}&sort=0&offset=${offset}&sex=1&count=${qnt}&country=1&birth_month=${month}&birth_day=${day}&birth_year=${year}&has_photo=1&access_token_2=${access_token_2}&v=5.103`;
       }
 
       if (q === "null" && city === "null" && year !== "null") {
-        url = `https://api.vk.com/method/users.search?sort=0&offset=${offset}&sex=1&count=${qnt}&country=1&birth_month=${month}&birth_day=${day}&birth_year=${year}&has_photo=1&access_token=${access_token}&v=5.103`;
+        url = `https://api.vk.com/method/users.search?sort=0&offset=${offset}&sex=1&count=${qnt}&country=1&birth_month=${month}&birth_day=${day}&birth_year=${year}&has_photo=1&access_token_2=${access_token_2}&v=5.103`;
       }
 
       console.log(`URL for request is : ${url}`);
@@ -333,7 +319,7 @@ app.get(
         offset: "0",
         q: q,
         sex: "1",
-        access_token: access_token,
+        access_token_2: access_token_2,
         v: "5.103",
       };
 
@@ -357,7 +343,7 @@ app.get(
       const _apibase = `https://api.vk.com/method/`;
 
       const res = await fetch(
-        `${_apibase}users.get?user_ids=${id}&fields=sex,bdate,sex,city,contacts,country,exports,followers_count,has_photo,photo_max,photo_max_orig,photo_100,online,exports,counters,relation,last_seen&access_token=${access_token}&v=5.103`
+        `${_apibase}users.get?user_ids=${id}&fields=sex,bdate,sex,city,contacts,country,exports,followers_count,has_photo,photo_max,photo_max_orig,photo_100,online,exports,counters,relation,last_seen&access_token_2=${access_token_2}&v=5.103`
       );
       if (!res.ok) {
         throw new Error(`Something was wrong`);
@@ -747,16 +733,12 @@ app.get("/dbmanager/searchposts", (req, res) => {
 });
 
 app.get("/searchtest", (req, res) => {
-  // https://api.vk.com/method/friends.getOnline?v=5.52&access_token=
-  // https://api.vk.com/method/users.get?user_ids=210700286&fields=bdate&access_token=533bacf01e11f55b536a565b57531ac114461ae8736d6506a3&v=5.103
-
   const _apibase = `https://api.vk.com/method/`;
-  const access_token = `13f73b67715c76756c9a2ad1a267c67b379ca938179264f8118e78e24892514771819fa93aa5027b42472`;
   console.log(`GET searchtest event`);
 
   const searhUsersTest = async () => {
     const res = await fetch(
-      `${_apibase}users.search?sort=1&offset=0&count=100&fields=sex,bdate,city,home_town,has_photo,counters,followers_count&city=1&sex=1&status=1&age_from=23&age_to=30&has_photo=1&can_access_closed=true&access_token=${access_token}&v=5.103`
+      `${_apibase}users.search?sort=1&offset=0&count=100&fields=sex,bdate,city,home_town,has_photo,counters,followers_count&city=1&sex=1&status=1&age_from=23&age_to=30&has_photo=1&can_access_closed=true&access_token_2=${access_token_2}&v=5.103`
     );
 
     if (!res.ok) {
@@ -782,7 +764,6 @@ app.ws("/matchprofiles", (ws, req) => {
     const { startId, quantity, id } = request;
 
     const _apibase = `https://api.vk.com/method/`;
-    const access_token = `fe083d0a598076a08306042e3a84da0a56c980124e7d0f93050bbe4abf09457045d17625832216679a369`;
 
     console.log(new Date().toISOString().replace("T", " ").replace("Z", " "));
     console.log(
@@ -791,7 +772,7 @@ app.ws("/matchprofiles", (ws, req) => {
 
     const getInfoByUserId = async (id) => {
       const res = await fetch(
-        `${_apibase}users.get?user_ids=${id}&fields=sex,bdate,sex,city,contacts,country,exports,followers_count,has_photo,photo_max,photo_max_orig,photo_100,online,exports,counters,relation,last_seen&access_token=${access_token}&v=5.103`
+        `${_apibase}users.get?user_ids=${id}&fields=sex,bdate,sex,city,contacts,country,exports,followers_count,has_photo,photo_max,photo_max_orig,photo_100,online,exports,counters,relation,last_seen&access_token_2=${access_token_2_2}&v=5.103`
       );
       if (!res.ok) {
         throw new Error(`Something was wrong`);
