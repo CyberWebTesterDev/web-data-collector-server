@@ -60,9 +60,6 @@ app.get("/getdefmov/:from/:to", (req, res) => {
 });
 
 app.get("/vkget/:ida", (req, res) => {
-  // https://api.vk.com/method/friends.getOnline?v=5.52&access_token_2=
-  // https://api.vk.com/method/users.get?user_ids=210700286&fields=bdate&access_token_2=533bacf01e11f55b536a565b57531ac114461ae8736d6506a3&v=5.103
-
   const { ida } = req.params;
   const _apibase = `https://api.vk.com/method/`;
   console.log(`GET vkget event for id: ${ida}`);
