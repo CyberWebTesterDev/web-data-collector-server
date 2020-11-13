@@ -6,7 +6,6 @@ const app = express();
 const expressWs = require("express-ws")(app);
 const fetch = require("node-fetch");
 const {
-  processProfileData,
   waitTimeout,
   counterNotNull,
   processProfileDataSimple,
@@ -24,7 +23,6 @@ const getMoviesData = async (x, y) => {
   const result = await webscraper.getWebScrapedDataArray(x, y);
   console.log(result);
   return result;
-  // loginToVk.loginToVkVisual()
 };
 
 app.use(cors());
@@ -121,13 +119,8 @@ app.get("/vkget/matchprofiles/:from/:q", (req, res) => {
     }
 
     await waitTimeout(3000);
-
     console.log(`Starting to process data...`);
-
     await waitTimeout(3000);
-
-    // console.log('resultarray for CHECK')
-    // console.log(resultarray)
     matcharray = processProfileDataSimple(resultarray);
     return matcharray;
   };
@@ -141,10 +134,6 @@ app.get("/vkget/matchprofiles/:from/:q", (req, res) => {
       }): ${counterNotNull(data)}`
     );
     const matchesShort = counterNotNull(data);
-
-    //res.send(data)
-    // console.log('matchesShort')
-    //console.log(matchesShort)
     res.send(data);
   });
 });
@@ -329,7 +318,6 @@ app.get(
       try {
         const resp = await fetch(url);
         let res = await resp.json();
-        //console.log(res)
         return res;
       } catch (e) {
         throw e;
@@ -352,7 +340,6 @@ app.get(
     const getAsyncData = async (id, count) => {
       await waitTimeout(350);
       return getInfoByUserId(id).then((data) => {
-        //console.clear();
         console.log(`Data collected for the profile ${id} (${count})`);
         return data.response[0];
       });
@@ -374,7 +361,6 @@ app.get(
       let resultArray = await getAsyncSearhProfilesData(result.response.items);
 
       console.log("resultArray");
-      // console.log(resultArray)
       let smArr = [];
       smArr = processProfileDataFromSearch(resultArray);
       return smArr;
@@ -391,7 +377,6 @@ app.get(
           "\n"
       );
       console.log(`Searched profiles has been processed!`);
-      //console.log(resp)
       console.log(
         `Matches (${counterNotNull(resp).length}): ${counterNotNull(resp)}`
       );
@@ -662,7 +647,6 @@ app.post("/dbmanager/insertupdprofile", (req, res) => {
   let profile = req.body;
   console.log(`Received POST request with data`);
   console.log(`${JSON.stringify(req.headers)}`);
-  //console.log(profile);
   profile = profileMapper(profile);
   (async (profile) => {
     console.log(`Async function is invoking DB update for profile`);
@@ -789,9 +773,6 @@ app.ws("/matchprofiles", (ws, req) => {
         getInfoByUserId(i)
           .then((data) => {
             currentCounter++;
-            //process.stdout.write(`Processed ${currentCounter} account(s)...`);
-            // console.clear();
-            // console.log(`Collected ${currentCounter} account(s)...`)
             console.log(`WS Data collected for the profile ${i}`);
             resultarray.push(data.response[0]);
           })
