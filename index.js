@@ -786,14 +786,19 @@ app.ws("/matchprofiles", (ws, req) => {
       for (i = f; i < t; i++) {
         await waitTimeout(600);
 
-        getInfoByUserId(i).then((data) => {
+        getInfoByUserId(i)
+          .then((data) => {
           currentCounter++;
           //process.stdout.write(`Processed ${currentCounter} account(s)...`);
           // console.clear();
           // console.log(`Collected ${currentCounter} account(s)...`)
           console.log(`WS Data collected for the profile ${i}`);
           resultarray.push(data.response[0]);
-        });
+        })
+          .catch(error) {
+          console.log(error);
+          throw error;
+        }
       }
 
       await waitTimeout(3000);
