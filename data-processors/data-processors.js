@@ -141,7 +141,7 @@ const processProfileDataFromSearch = (array) => {
             .split("-");
           if (
             dateSeen[0] === "2020" &&
-            (dateSeen[1] == "10" || dateSeen[1] == "11")
+            (dateSeen[1] == "12" || dateSeen[1] == "12")
           ) {
             if (p.counters.friends <= 190 && p.counters.followers < 550) {
               console.log(`Profile ${p.id} WAS MATCHED !`);
