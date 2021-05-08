@@ -28,9 +28,11 @@ module.exports.profileMapper = (profile) => {
   console.log(`profileMapper enter`);
   console.log(profile);
 
-  profile["last_seen.time"] = new Date(
-    profile["last_seen.time"].replace(" ", "T").replace(" ", "Z")
-  );
+  profile["last_seen.time"]
+    ? (profile["last_seen.time"] = new Date(
+        profile["last_seen.time"].replace(" ", "T").replace(" ", "Z")
+      ))
+    : "Unknown";
 
   const mappingTable = {
     "city.title": "city",
