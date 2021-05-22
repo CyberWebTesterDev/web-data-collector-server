@@ -10,7 +10,7 @@ interface IConfig {
    connectionTimeoutMillis: number;
 }
 
-const configPostgres: IConfig = {
+export const configPostgres: IConfig = {
    user: 'postgres',
    host: '127.0.0.1',
    dataBase: 'webscraper_db',
