@@ -1,15 +1,16 @@
 {
    "compilerOptions": {
-      "outDir": "./dist/",
+      "outDir": "./build",
+      "rootDir": "./",
       "noImplicitAny": true,
       "module": "es6",
-      "target": "es5",
+      "target": "ES3",
       "jsx": "preserve",
       "allowJs": true,
-      "noEmit": true,
+      "noEmit": false,
       "moduleResolution": "node"
    },
-   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js"],
    "exclude": ["node_modules"],
    "files": ["index.d.ts"]
 }

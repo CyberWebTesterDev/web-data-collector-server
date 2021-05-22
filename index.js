@@ -9,25 +9,20 @@ const {
    waitTimeout,
    counterNotNull,
    processProfileDataFromSearch,
-} = require('./data-processors/data-processors.ts');
+} = require('./data-processors/data-processors');
 const flatten = require('flat');
 const port = 8333;
 const { DBmanager } = require('./db-manager/db-manager');
 const { profileMapper, profileMapperTs } = require('./data-processors/helper');
 const { access_token_2, access_token_actual } = require('./access-data/token');
-
 const db = new DBmanager();
-
 const getMoviesData = async (x, y) => {
    const result = await webscraper.getWebScrapedDataArray(x, y);
    console.log(result);
    return result;
 };
-
 app.use(cors());
-
 app.use(express.json());
-
 app.get('/getdefmov', (req, res) => {
    const currentDateStr = new Date()
       .toISOString()
@@ -43,7 +38,6 @@ app.get('/getdefmov', (req, res) => {
 
 app.get('/getdefmov/:from/:to', (req, res) => {
    const { from, to } = req.params;
-
    const currentDateStr = new Date()
       .toISOString()
       .replace('T', ' ')
