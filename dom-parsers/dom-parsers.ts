@@ -29,7 +29,7 @@ const getDOM = async (html: string) => {
     director: document.querySelector(DOCUMENT_MOVIES_SELECTORS.director),
   };
 
-  const isNullValues2 = (obj: IDocumentQuerySelectorsDictionary['movieSelectors']): boolean => {
+  const isNullValues2 = <T extends IDocumentQuerySelectorsDictionary['movieSelectors']>(obj: T): boolean => {
     for (let key in obj) {
       if (obj[key] === null) {
         return true;

@@ -15,7 +15,6 @@ export interface IDocumentQuerySelectorsDictionary {
     actor_4: HTMLElement;
     actor_5: HTMLElement;
     director: HTMLElement;
-    [key: string]: HTMLElement | null;
   };
   parsedMoviesStringData: {
     title: string;
@@ -29,11 +28,12 @@ export interface IDocumentQuerySelectorsDictionary {
     description: string;
     director: string;
     mainActors: string[];
-  }
+  };
   htmlDocument: {
     document: HTMLElement;
   };
 }
+
 export const DOCUMENT_MOVIES_SELECTORS = {
   title: 'span[class=moviename-title-wrapper]',
   originalTitle: '.alternativeHeadline',
