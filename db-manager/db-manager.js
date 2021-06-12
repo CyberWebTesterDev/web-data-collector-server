@@ -1,7 +1,7 @@
-const { Pool } = require("pg");
-const pcon = require("../db-manager/poolconf");
-const sql = require("../db-manager/sql-scripts");
-const { insertFields, profileMapper } = require("../data-processors/helper");
+const { Pool } = require('pg');
+const pcon = require('../db-manager/poolconf');
+const sql = require('../db-manager/sql-scripts');
+const { insertFields, profileMapper } = require('../data-processors/helper');
 
 class DBmanager {
   _poolW = new Pool(pcon.configPostgres);
@@ -18,7 +18,7 @@ class DBmanager {
 
     try {
       const res = await this._poolW.query(sql.sqlins);
-      console.log("Post insert has been successfully processed");
+      console.log('Post insert has been successfully processed');
       // console.log(res);
       return res;
     } catch (e) {
@@ -39,7 +39,7 @@ class DBmanager {
       let res = await this._poolW.query(sql.SQL_INSERT_UPDATE_PROFILES);
       res = await this._poolW.query(sql.SQL_INSERT_UPDATE_PROFILES_CHECK);
       console.log(
-        `Check flag for vk profile has been successfully processed for profile: ${vkId}, first name: ${firstName}, last name: ${lastName}`
+        `Check flag for vk profile has been successfully processed for profile: ${vkId}, first name: ${firstName}, last name: ${lastName}`,
       );
       // console.log(res);
       return res;
@@ -58,11 +58,11 @@ class DBmanager {
       let res = await this._poolW.query(sql.SQL_INSERT_UPDATE_PROFILES_CHECK);
       if (res.rowCount > 0) {
         console.log(
-          `Check flag for vk profile has been successfully processed for profile: ${vkId}, first name: ${firstName}, last name: ${lastName}`
+          `Check flag for vk profile has been successfully processed for profile: ${vkId}, first name: ${firstName}, last name: ${lastName}`,
         );
-        return { returnCode: "SUCCESS" };
+        return { returnCode: 'SUCCESS' };
       } else {
-        return { returnCode: "NOT_UPDATED" };
+        return { returnCode: 'NOT_UPDATED' };
       }
     } catch (e) {
       console.error(e.stack);
@@ -73,7 +73,7 @@ class DBmanager {
   insertUpdateProfile = async (profile) => {
     let res;
 
-    console.log(`insertUpdateProfile enter`);
+    console.log('insertUpdateProfile enter');
 
     if (profile.deactivated) {
       console.log(`Profile ${profile.vk_id} is deactivated`);
@@ -83,14 +83,14 @@ class DBmanager {
         res = await this._poolW.query(sql.SQL_UPDATE_PROFILE_DEACTIVATED);
         if (res.rowCount > 0) {
           console.log(
-            `Deactivated profile ${profile.vk_id} has been successfully updated in DB`
+            `Deactivated profile ${profile.vk_id} has been successfully updated in DB`,
           );
-          return { returnCode: "SUCCESS" };
+          return { returnCode: 'SUCCESS' };
         }
         console.log(
-          `Deactivated profile ${profile.vk_id} has NOT been updated in DB`
+          `Deactivated profile ${profile.vk_id} has NOT been updated in DB`,
         );
-        return { returnCode: "NOT_UPDATED" };
+        return { returnCode: 'NOT_UPDATED' };
         // console.log(res);
       } catch (e) {
         console.error(e.stack);
@@ -117,12 +117,12 @@ class DBmanager {
       res = await this._poolW.query(sql.SQL_INSERT_UPDATE_PROFILE_DATA);
       if (res.rowCount > 0) {
         console.log(
-          `Profile ${profile.vk_id} has been successfully updated in DB`
+          `Profile ${profile.vk_id} has been successfully updated in DB`,
         );
-        return { returnCode: "SUCCESS" };
+        return { returnCode: 'SUCCESS' };
       }
       console.log(`Profile ${profile.vk_id} has NOT been updated in DB`);
-      return { returnCode: "NOT_UPDATED" };
+      return { returnCode: 'NOT_UPDATED' };
       // console.log(res);
     } catch (e) {
       console.error(e.stack);
@@ -131,7 +131,7 @@ class DBmanager {
   };
 
   insertUpdateProfileTest = async (profile) => {
-    console.log(`insertUpdateProfileTest enter`);
+    console.log('insertUpdateProfileTest enter');
 
     //console.log(profile);
 
@@ -151,16 +151,16 @@ class DBmanager {
 
     try {
       let res = await this._poolW.query(
-        sql.SQL_INSERT_UPDATE_PROFILE_DATA_TEST
+        sql.SQL_INSERT_UPDATE_PROFILE_DATA_TEST,
       );
       if (res.rowCount > 0) {
         console.log(
-          `Profile ${profile.vk_id} has been successfully updated in DB`
+          `Profile ${profile.vk_id} has been successfully updated in DB`,
         );
-        return { returnCode: "SUCCESS" };
+        return { returnCode: 'SUCCESS' };
       }
       console.log(`Profile ${profile.vk_id} has NOT been updated in DB`);
-      return { returnCode: "NOT_UPDATED" };
+      return { returnCode: 'NOT_UPDATED' };
       // console.log(res);
     } catch (e) {
       console.error(e.stack);
@@ -169,7 +169,7 @@ class DBmanager {
   };
 
   selectProfielsCheck = async () => {
-    console.log(`DBmanager: selectProfielsCheck enter`);
+    console.log('DBmanager: selectProfielsCheck enter');
 
     try {
       let res = [];
@@ -186,7 +186,7 @@ class DBmanager {
   };
 
   selectVkIdsProfiles = async () => {
-    console.log(`DBmanager: selectVkIdsProfiles enter`);
+    console.log('DBmanager: selectVkIdsProfiles enter');
 
     try {
       let res = [];
@@ -203,7 +203,7 @@ class DBmanager {
   };
 
   selectVkIdsProfilesRaw = async () => {
-    console.log(`DBmanager: selectVkIdsProfiles enter`);
+    console.log('DBmanager: selectVkIdsProfiles enter');
 
     try {
       let res = [];
@@ -220,7 +220,7 @@ class DBmanager {
   };
 
   selectProfielSingleCheck = async (profileId) => {
-    console.log(`DBmanager: selectProfielSingleCheck enter`);
+    console.log('DBmanager: selectProfielSingleCheck enter');
 
     sql.SQL_SELECT_PROFILE_SINGLE_CHECK.values[0] = profileId;
 
@@ -239,13 +239,13 @@ class DBmanager {
   };
 
   selectProfileDataExtended = async (profileId) => {
-    console.log(`DBmanager: selectProfileDataExtended enter`);
+    console.log('DBmanager: selectProfileDataExtended enter');
     let res = [];
     sql.SQL_SELECT_MULTIPLE_PROFILE_DATA_EXTENDED.values[0] = profileId;
 
     try {
       res = await this._poolW.query(
-        sql.SQL_SELECT_MULTIPLE_PROFILE_DATA_EXTENDED
+        sql.SQL_SELECT_MULTIPLE_PROFILE_DATA_EXTENDED,
       );
       //console.log('Raw data: '+'\n');
       //console.log(res);
@@ -259,7 +259,7 @@ class DBmanager {
   };
 
   getProfileById = async (profileId) => {
-    console.log(`DBmanager: getProfileById enter`);
+    console.log('DBmanager: getProfileById enter');
 
     sql.SQL_SELECT_PROFILES_BY_ID.values[0] = profileId;
 
@@ -278,7 +278,7 @@ class DBmanager {
   };
 
   updateFavoriteMark = async (bool, profileId) => {
-    console.log(`DBmanager: updateFavoriteMark enter`);
+    console.log('DBmanager: updateFavoriteMark enter');
 
     sql.SQL_UPDATE_PROFILE_IS_FAVORITE.values[0] = bool;
     sql.SQL_UPDATE_PROFILE_IS_FAVORITE.values[1] = profileId;
@@ -287,15 +287,15 @@ class DBmanager {
       let res = [];
       res = await this._poolW.query(sql.SQL_UPDATE_PROFILE_IS_FAVORITE);
       console.log(
-        `Profile ${profileId} has been marked, is_favorite value: ${bool}`
+        `Profile ${profileId} has been marked, is_favorite value: ${bool}`,
       );
       if (res.rowCount > 0) {
         console.log(`Profile ${profileId} has been successfully updated in DB`);
-        return { returnCode: "SUCCESS" };
+        return { returnCode: 'SUCCESS' };
       }
       console.log(`Profile ${profileId} has NOT been updated in DB`);
 
-      return { returnCode: "NOT_UPDATED" };
+      return { returnCode: 'NOT_UPDATED' };
     } catch (e) {
       // console.error(e.stack);
       throw e;
@@ -303,7 +303,7 @@ class DBmanager {
   };
 
   updateRelatedMark = async (bool, profileId) => {
-    console.log(`DBmanager: updateRelatedMark enter`);
+    console.log('DBmanager: updateRelatedMark enter');
 
     sql.SQL_UPDATE_PROFILE_IS_RELATED.values[0] = bool;
     sql.SQL_UPDATE_PROFILE_IS_RELATED.values[1] = profileId;
@@ -312,15 +312,15 @@ class DBmanager {
       let res = [];
       res = await this._poolW.query(sql.SQL_UPDATE_PROFILE_IS_RELATED);
       console.log(
-        `Profile ${profileId} has been marked, is_related value: ${bool}`
+        `Profile ${profileId} has been marked, is_related value: ${bool}`,
       );
       if (res.rowCount > 0) {
         console.log(`Profile ${profileId} has been successfully updated in DB`);
-        return { returnCode: "SUCCESS" };
+        return { returnCode: 'SUCCESS' };
       }
       console.log(`Profile ${profileId} has NOT been updated in DB`);
 
-      return { returnCode: "NOT_UPDATED" };
+      return { returnCode: 'NOT_UPDATED' };
     } catch (e) {
       // console.error(e.stack);
       throw e;
@@ -328,7 +328,7 @@ class DBmanager {
   };
 
   updateBirthYearProfile = async (year, profileId) => {
-    console.log(`DBmanager: updateBirthYearProfile enter`);
+    console.log('DBmanager: updateBirthYearProfile enter');
 
     sql.SQL_UPDATE_PROFILE_BIRTH_YEAR.values[0] = year;
     sql.SQL_UPDATE_PROFILE_BIRTH_YEAR.values[1] = profileId;
@@ -339,11 +339,11 @@ class DBmanager {
       console.log(`Profile ${profileId} has been updated, birth year: ${year}`);
       if (res.rowCount > 0) {
         console.log(`Profile ${profileId} has been successfully updated in DB`);
-        return { returnCode: "SUCCESS" };
+        return { returnCode: 'SUCCESS' };
       }
       console.log(`Profile ${profileId} has NOT been updated in DB`);
 
-      return { returnCode: "NOT_UPDATED" };
+      return { returnCode: 'NOT_UPDATED' };
     } catch (e) {
       // console.error(e.stack);
       throw e;
@@ -351,7 +351,7 @@ class DBmanager {
   };
 
   updateEstimation = async (estimation, profileId) => {
-    console.log(`DBmanager: selectProfielSingleCheck enter`);
+    console.log('DBmanager: selectProfielSingleCheck enter');
 
     sql.SQL_UPDATE_PROFILE_CHECK_ESTIMATION.values[0] = estimation;
     sql.SQL_UPDATE_PROFILE_CHECK_ESTIMATION.values[1] = profileId;
@@ -360,7 +360,7 @@ class DBmanager {
       let res = [];
       res = await this._poolW.query(sql.SQL_UPDATE_PROFILE_CHECK_ESTIMATION);
       console.log(
-        `Profile ${profileId} has been estimated, estimation value: ${estimation}`
+        `Profile ${profileId} has been estimated, estimation value: ${estimation}`,
       );
       //console.log(res);
       //res = this.getStrResultset(res);
@@ -373,7 +373,7 @@ class DBmanager {
   };
 
   updateCorrelationEst = async (correlationEst, profileId) => {
-    console.log(`DBmanager: selectProfielSingleCheck enter`);
+    console.log('DBmanager: selectProfielSingleCheck enter');
 
     sql.SQL_UPDATE_PROFILE_CHECK_CORRELATION_EST.values[0] = correlationEst;
     sql.SQL_UPDATE_PROFILE_CHECK_CORRELATION_EST.values[1] = profileId;
@@ -381,7 +381,7 @@ class DBmanager {
     try {
       let res = [];
       res = await this._poolW.query(
-        sql.SQL_UPDATE_PROFILE_CHECK_CORRELATION_EST
+        sql.SQL_UPDATE_PROFILE_CHECK_CORRELATION_EST,
       );
       //console.log('Raw data: '+'\n');
       //console.log(res);
@@ -395,7 +395,7 @@ class DBmanager {
   };
 
   updateHasChild = async (profileId, bool) => {
-    console.log(`DBmanager: updateHasChild enter`);
+    console.log('DBmanager: updateHasChild enter');
 
     sql.SQL_UPDATE_PROFILE_CHECK_HAS_CHILD.values[0] = bool;
     sql.SQL_UPDATE_PROFILE_CHECK_HAS_CHILD.values[1] = profileId;
@@ -404,7 +404,7 @@ class DBmanager {
       let res = [];
       res = await this._poolW.query(sql.SQL_UPDATE_PROFILE_CHECK_HAS_CHILD);
       console.log(
-        `Has child property of profile ${profileId} has been changed to ${bool}`
+        `Has child property of profile ${profileId} has been changed to ${bool}`,
       );
       //console.log(res);
       //res = this.getStrResultset(res);
@@ -417,7 +417,7 @@ class DBmanager {
   };
 
   updateIsInRelationship = async (profileId, bool) => {
-    console.log(`DBmanager: updateHasChild enter`);
+    console.log('DBmanager: updateHasChild enter');
 
     sql.SQL_UPDATE_PROFILE_CHECK_IS_IN_RELATIONSHIP.values[0] = bool;
     sql.SQL_UPDATE_PROFILE_CHECK_IS_IN_RELATIONSHIP.values[1] = profileId;
@@ -425,10 +425,10 @@ class DBmanager {
     try {
       let res = [];
       res = await this._poolW.query(
-        sql.SQL_UPDATE_PROFILE_CHECK_IS_IN_RELATIONSHIP
+        sql.SQL_UPDATE_PROFILE_CHECK_IS_IN_RELATIONSHIP,
       );
       console.log(
-        `Is in relationship property of profile ${profileId} has been changed to ${bool}`
+        `Is in relationship property of profile ${profileId} has been changed to ${bool}`,
       );
       //console.log(res);
       //res = this.getStrResultset(res);
@@ -441,12 +441,12 @@ class DBmanager {
   };
 
   selectPosts = async () => {
-    console.log(`DBmanager: selectPosts enter`);
+    console.log('DBmanager: selectPosts enter');
 
     try {
       let res = [];
       res = await this._poolW.query(sql.sqlSelectActualPosts);
-      console.log("Raw data: " + "\n");
+      console.log('Raw data: ' + '\n');
       //console.log(res);
       res = this.getStrResultset(res.rows);
       //console.log(res);

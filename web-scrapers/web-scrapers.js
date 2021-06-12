@@ -1,6 +1,6 @@
-const puppeteer = require("puppeteer");
-const getDOM = require("../dom-parsers/dom-parsers");
-const loginToVk = require("./auth");
+const puppeteer = require('puppeteer');
+const getDOM = require('../dom-parsers/dom-parsers');
+const loginToVk = require('./auth');
 
 const urlFilmTransform = (param) => {
   return `https://www.kinopoisk.ru/film/${param}/`;
@@ -16,7 +16,7 @@ const getWebScrapedData = async () => {
   const page = await browser.newPage();
 
   const getFilmPageContent = async (id) => {
-    await page.goto(urlFilmTransform(id), { waitUntil: "networkidle2" });
+    await page.goto(urlFilmTransform(id), { waitUntil: 'networkidle2' });
     const rawFilmData = await page.content();
     return rawFilmData;
   };
@@ -32,7 +32,7 @@ const getWebScrapedDataArray = async (startId, endId) => {
   let resultset = [];
 
   const getFilmPageContent_2 = async (id) => {
-    await page.goto(urlFilmTransform(id), { waitUntil: "networkidle2" });
+    await page.goto(urlFilmTransform(id), { waitUntil: 'networkidle2' });
     const content = await page.content();
     return content;
   };
@@ -56,9 +56,9 @@ const getWebScrapedDataArrayTest = async (startId, endId) => {
 
   const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
-  await page.goto(`https://www.kinopoisk.ru/`, { waitUntil: "networkidle2" });
+  await page.goto('https://www.kinopoisk.ru/', { waitUntil: 'networkidle2' });
   await waitTimeout(5000);
-  await page.goto(urlFilmTransform(startId), { waitUntil: "networkidle2" });
+  await page.goto(urlFilmTransform(startId), { waitUntil: 'networkidle2' });
 };
 
 const getVkData = async () => {
@@ -66,7 +66,7 @@ const getVkData = async () => {
   const page = await browser.newPage();
 
   const getFilmPageContent = async (id) => {
-    await page.goto(urlFilmTransform(id), { waitUntil: "networkidle2" });
+    await page.goto(urlFilmTransform(id), { waitUntil: 'networkidle2' });
     const rawFilmData = await page.content();
     return rawFilmData;
   };

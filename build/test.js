@@ -1,5 +1,5 @@
 //test
-var input = [
+const input = [
     { value: "qweq", order: 4, expired: false },
     { value: "asdq", order: 2, expired: true },
     { value: "jkri", order: 1, expired: false },

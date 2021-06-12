@@ -1,0 +1,5 @@
+export enum ECoreEvents {
+  FILES_READED = 'FILES_READED',
+  FILE_NOT_FOUND = 'FILE_NOT_FOUND',
+  EXCEPTION = 'EXCEPTION'
+}

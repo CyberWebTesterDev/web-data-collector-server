@@ -6,12 +6,12 @@ module.exports.sqlins = {
 };
 
 module.exports.sqlSelectPosts = {
-  text: `select * from webscraper_db.public.posts;`,
+  text: 'select * from webscraper_db.public.posts;',
   values: [],
 };
 
 module.exports.sqlSelectActualPosts = {
-  text: `SELECT * FROM webscraper_db.public.posts 
+  text: `SELECT * FROM webscraper_db.public.posts
     where id >= 8
     order by creation_date desc;`,
   values: [],
@@ -59,7 +59,7 @@ module.exports.SQL_SELECT_PROFILES_CHECK = {
 };
 
 module.exports.SQL_SELECT_VK_ID_PROFILES_ALL = {
-  text: `SELECT vk_id FROM webscraper_db.public.profiles limit 15;`,
+  text: 'SELECT vk_id FROM webscraper_db.public.profiles limit 15;',
 };
 
 module.exports.SQL_SELECT_VK_ID_PROFILES_BATCH = {
@@ -71,11 +71,11 @@ module.exports.SQL_SELECT_VK_ID_PROFILES_BATCH = {
 };
 
 module.exports.SQL_SELECT_MULTIPLE_PROFILE_DATA_EXTENDED = {
-  text: `select 
-    p.vk_id, 
-    p.first_name, 
-    p.last_name, 
-    p.birth_date, 
+  text: `select
+    p.vk_id,
+    p.first_name,
+    p.last_name,
+    p.birth_date,
     p.birth_year,
     p.city,
     p.counters_friends,

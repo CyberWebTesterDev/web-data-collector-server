@@ -22,13 +22,13 @@ module.exports.insertFields = [
     'city',
     'is_closed',
 ];
-module.exports.profileMapper = function (profile) {
-    console.log("profileMapper enter");
+module.exports.profileMapper = (profile) => {
+    console.log(`profileMapper enter`);
     console.log(profile);
     profile['last_seen.time']
         ? (profile['last_seen.time'] = new Date(profile['last_seen.time'].replace(' ', 'T').replace(' ', 'Z')))
         : 'Unknown';
-    var mappingTable = {
+    const mappingTable = {
         'city.title': 'city',
         'country.title': 'country',
         'counters.friends': 'counters_friends',
@@ -40,26 +40,26 @@ module.exports.profileMapper = function (profile) {
         last_name: 'last_name',
         id: 'vk_id',
         'last_seen.time': 'last_seen',
-        is_closed: 'is_closed'
+        is_closed: 'is_closed',
     };
-    for (var key in profile) {
+    for (let key in profile) {
         profile.renameProperty(key, mappingTable[key]);
         profile.deactivated = false;
     }
-    console.log("profileMapper result");
+    console.log(`profileMapper result`);
     console.log(profile);
     return profile;
     //console.log(`Renamed object is:`);
     //console.log(profile);
 };
-module.exports.profileMapperTs = function (profile) {
+module.exports.profileMapperTs = (profile) => {
     //console.log(`profileMapper enter`);
     //console.log(profile);
     if (profile.deactivated) {
         return { vk_id: profile.id, deactivated: true };
     }
     profile['last_seen.time'] = new Date(profile['last_seen.time'] * 1000);
-    var mappingTable = {
+    const mappingTable = {
         'city.title': 'city',
         'country.title': 'country',
         'counters.friends': 'counters_friends',
@@ -71,9 +71,9 @@ module.exports.profileMapperTs = function (profile) {
         last_name: 'last_name',
         id: 'vk_id',
         'last_seen.time': 'last_seen',
-        is_closed: 'is_closed'
+        is_closed: 'is_closed',
     };
-    for (var key in profile) {
+    for (let key in profile) {
         profile.renameProperty(key, mappingTable[key]);
         profile.deactivated = false;
     }

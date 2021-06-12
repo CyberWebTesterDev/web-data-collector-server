@@ -1,15 +1,15 @@
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 import {
-  IDocumentQuerySelectorsDictionary,
+  IDocumentQuerySelectorsDictionary as IDQSD,
   DOCUMENT_MOVIES_SELECTORS,
 } from './dom-parsers-lib';
 
 const getDOM = async (html: string) => {
-  const { document }: IDocumentQuerySelectorsDictionary['htmlDocument'] =
+  const { document }: IDQSD['htmlDocument'] =
     new JSDOM(html).window;
 
-  const movieDataMeta: IDocumentQuerySelectorsDictionary['movieSelectors'] = {
+  const movieDataMeta: IDQSD['movieSelectors'] = {
     title: document.querySelector(DOCUMENT_MOVIES_SELECTORS.title),
     originalTitle: document.querySelector(
       DOCUMENT_MOVIES_SELECTORS.originalTitle,
@@ -29,7 +29,7 @@ const getDOM = async (html: string) => {
     director: document.querySelector(DOCUMENT_MOVIES_SELECTORS.director),
   };
 
-  const isNullValues2 = <T extends IDocumentQuerySelectorsDictionary['movieSelectors']>(obj: T): boolean => {
+  const isNullValues2 = <T extends IDQSD['movieSelectors']>(obj: T): boolean => {
     for (let key in obj) {
       if (obj[key] === null) {
         return true;
@@ -38,7 +38,7 @@ const getDOM = async (html: string) => {
     return false;
   };
 
-  const parseData = (): IDocumentQuerySelectorsDictionary['parsedMoviesStringData'] => {
+  const parseData = (): IDQSD['parsedMoviesStringData'] => {
     console.log(
       `Starting to parse data from HTML for ${
         document.querySelector('head > meta:nth-child(33)').textContent
@@ -60,11 +60,11 @@ const getDOM = async (html: string) => {
       filmId:
         movieDataMeta.filmId.textContent.split('/')[4] === 'player'
           ? document
-              .querySelector('head > meta:nth-child(35)')
-              .textContent.split('/')[4]
+            .querySelector('head > meta:nth-child(35)')
+            .textContent.split('/')[4]
           : document
-              .querySelector(DOCUMENT_MOVIES_SELECTORS.filmId)
-              .textContent.split('/')[4],
+            .querySelector(DOCUMENT_MOVIES_SELECTORS.filmId)
+            .textContent.split('/')[4],
       year: movieDataMeta.year.innerHTML,
       country: movieDataMeta.country.textContent
         .replace('                     ', ' ')
@@ -81,8 +81,7 @@ const getDOM = async (html: string) => {
   if (!isNullValues2(movieDataMeta)) {
     let obj = parseData();
     return obj;
-  } else return null;
+  } else {return null;}
 };
 
 exports.getDOM = getDOM;
-

@@ -1,16 +1,18 @@
 {
-   "compilerOptions": {
-      "outDir": "./build",
-      "rootDir": "./",
-      "noImplicitAny": true,
-      "module": "es6",
-      "target": "ES3",
-      "jsx": "preserve",
-      "allowJs": true,
-      "noEmit": false,
-      "moduleResolution": "node"
-   },
-   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js"],
-   "exclude": ["node_modules"],
-   "files": ["index.d.ts"]
+  "compilerOptions": {
+    "outDir": "./build",
+    "rootDir": "./",
+    "noImplicitAny": true,
+    "module": "CommonJS",
+    "target": "ES2018",
+    "jsx": "preserve",
+    "allowJs": true,
+    "noEmit": false,
+    "moduleResolution": "Node",
+    "typeRoots": ["./node_modules/@types"],
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js"],
+  "exclude": ["./node_modules", "./build"],
+  "files": ["index.d.ts"],
+  "compileOnSave": true
 }
